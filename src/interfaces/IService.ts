@@ -8,6 +8,7 @@ interface IServiceResponse<T> {
 
 interface IService<T> {
   create(obj: T): Promise<IServiceResponse<T>>,
+  read(): Promise<IServiceResponse<T[]>>,
 }
 
 export default IService;
