@@ -38,4 +38,18 @@ describe('Cars Model', () => {
 
   });
 
+  describe('Searching one car', async () => {
+
+    before(async () => {
+      sinon.stub(Model, 'findOne').resolves(carMockWithId);
+    });
+
+    it('Succesfully found', async () => {
+      const car = await carsModel.readOne(carMockWithId._id);
+      expect(car).to.be.deep.equal(carMockWithId);
+    });
+
+  });
+
+
 });
