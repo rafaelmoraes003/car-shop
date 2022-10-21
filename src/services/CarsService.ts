@@ -17,6 +17,11 @@ class CarsService implements IService<ICar> {
     const createdCar = await this._carModel.create(obj);
     return { code: StatusCodes.CREATED, data: createdCar };
   }
+
+  public async read() {
+    const cars = await this._carModel.read();
+    return { code: StatusCodes.OK, data: cars };
+  }
 }
 
 export default CarsService;
