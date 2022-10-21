@@ -11,6 +11,12 @@ class CarsService implements IService<ICar> {
   constructor(model: IModel<ICar>) {
     this._carModel = model;
   }
+
+  public async create(obj: ICar) {
+    validateBody(obj, zodCarSchema, zodVehicleSchema);
+    const createdCar = await this._carModel.create(obj);
+    return { code: StatusCodes.CREATED, data: createdCar };
+  }
 }
 
 export default CarsService;
