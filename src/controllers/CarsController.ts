@@ -8,6 +8,18 @@ class CarsController {
   constructor(service: IService<ICar>) {
     this._carService = service;
   }
+
+  public create = async (req: Request, res: Response, next: NextFunction) => {
+    const { model, year, color, status, buyValue, seatsQty, doorsQty } = req.body;
+    try {
+      const { code, data } = await this._carService.create({
+        model, year, color, status, buyValue, seatsQty, doorsQty,
+      });
+      return res.status(code).json(data);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default CarsController;
