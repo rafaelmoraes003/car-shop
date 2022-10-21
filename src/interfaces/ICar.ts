@@ -5,3 +5,5 @@ export const zodCarSchema = z.object({
   doorsQty: z.number().int().gte(2).lte(4),
   seatsQty: z.number().int().gte(2).lte(7),
 });
+
+export type ICar = z.infer<typeof zodCarSchema> & IVehicle;
