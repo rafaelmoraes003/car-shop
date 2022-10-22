@@ -8,5 +8,6 @@ const motorcyclesController = new MotorcyclesController(motorcyclesService);
 
 motorcycles.post('/', motorcyclesController.create);
 motorcycles.get('/', motorcyclesController.read);
+motorcycles.get('/:id', motorcyclesController.readOne);
 
 export default motorcycles;
