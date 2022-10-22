@@ -79,4 +79,34 @@ describe('Cars Controller', () => {
 
   });
 
+  describe('Searching one car', () => {
+
+    before(async () => {
+      sinon.stub(carsService, 'readOne')
+        .onCall(0).resolves({
+          code: StatusCodes.OK,
+          data: carMockWithId,
+        })
+        .onCall(1).throws(serverError);
+
+      req.params = { id: carMockWithId._id };
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns(res);
+      next = sinon.stub();
+
+    });
+
+    it('Successfully found', async () => {
+      await carsController.readOne(req, res, next as NextFunction);
+      expect((res.status as sinon.SinonStub).calledWith(StatusCodes.OK)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith(carMockWithId)).to.be.true;
+    });
+
+    it('Server error', async () => {
+      await carsController.readOne(req, res, next as NextFunction);
+      expect((next as sinon.SinonStub).calledWith(serverError)).to.be.true;
+    });
+
+  });
+
 });
