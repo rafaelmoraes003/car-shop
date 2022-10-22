@@ -39,6 +39,20 @@ class MotorcyclesController {
       next(error);
     }
   };
+
+  public update = async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const { model, year, color, status, buyValue, category, engineCapacity } = req.body;
+    try {
+      const { code, data } = await this._motorcycleService.update(
+        id,
+        { model, year, color, status, buyValue, category, engineCapacity },
+      );
+      return res.status(code).json(data);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default MotorcyclesController;
