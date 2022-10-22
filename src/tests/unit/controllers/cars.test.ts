@@ -139,4 +139,32 @@ describe('Cars Controller', () => {
 
   });
 
+  describe('Deleting a car', () => {
+    
+    before(async () => {
+      sinon.stub(carsService, 'delete')
+        .onCall(0).resolves({
+          code: StatusCodes.SUCCESS_NO_CONTENT,
+        })
+        .onCall(1).throws(serverError);
+    
+      req.params = { id: carMockWithId._id };
+      res.status = sinon.stub().returns(res);
+      res.end = sinon.stub().returns(res)
+      next = sinon.stub();
+    });
+
+    it('Successfully deleted', async () => {
+      await carsController.delete(req, res, next as NextFunction);
+      expect((res.status as sinon.SinonStub).calledWith(StatusCodes.SUCCESS_NO_CONTENT)).to.be.true;
+      expect((res.end as sinon.SinonStub).called).to.be.true;
+    });
+
+    it('Server error', async () => {
+      await carsController.delete(req, res, next as NextFunction);
+      expect((next as sinon.SinonStub).calledWith(serverError)).to.be.true;
+    });
+
+  });
+
 });
