@@ -10,5 +10,6 @@ const carsController = new CarsController(carsService);
 
 cars.post('/', carsController.create);
 cars.get('/', carsController.read);
+cars.get('/:id', carsController.readOne);
 
 export default cars;
