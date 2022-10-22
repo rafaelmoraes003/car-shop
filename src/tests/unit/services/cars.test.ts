@@ -5,6 +5,7 @@ import CarsService from '../../../services/CarsService';
 import { carMock, carMockWithId } from '../../mocks/cars';
 import StatusCodes from '../../../interfaces/StatusCodes';
 import CustomError from '../../../interfaces/CustomError';
+import { ICar } from '../../../interfaces/ICar';
 const { expect } = chai;
 
 describe('Cars Service', () => {
@@ -100,6 +101,72 @@ describe('Cars Service', () => {
       });
 
     });
+  });
+
+  describe('Updating a car', () => {
+
+    describe('Successfully updated', () => {
+
+      before(async () => {
+        sinon.stub(carsModel, 'update').resolves({
+          ...carMockWithId,
+          model: 'Jeep Renegade',
+        });
+      });
+
+      it('Returns updated car with code 200', async () => {
+        const updatedCar = await carsService.update(
+          carMockWithId._id,
+          { ...carMockWithId, model: 'Jeep Renegade' },
+        );
+        expect(updatedCar).to.be.deep.equal({
+          code: StatusCodes.OK,
+          data: { ...carMockWithId, model: 'Jeep Renegade' },
+        });
+      });
+
+    });
+
+    describe('Semantic error', () => {
+
+      it('Throws error "Required"', async () => {
+        try {
+          await carsService.update(carMockWithId._id, {} as ICar);
+        } catch (error: any) {
+          expect(error.message).to.be.equal('Required');
+        }
+      });
+
+    });
+
+    describe('Invalid ObjectId', () => {
+
+      it('Throws error "Id must have 24 hexadecimal characters"', async () => {
+        try {
+          await carsService.update('123', carMock);
+        } catch (error: any) {
+          expect(error.message).to.be.equal('Id must have 24 hexadecimal characters');
+        }
+      });
+
+    });
+
+    describe('Not found', () => {
+
+      before(async () => {
+        sinon.stub(carsModel, 'update').resolves(null);
+      });
+
+      it('Throws error "Object not found"', async () => {
+        try {
+          await carsService.update('111111111111111111111111', carMock);
+        } catch (error: any) {
+          expect(error.message).to.be.equal('Object not found');
+        }
+      });
+
+    });
+
   });
 
 });
