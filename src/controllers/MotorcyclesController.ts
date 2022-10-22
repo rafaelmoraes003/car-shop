@@ -20,6 +20,15 @@ class MotorcyclesController {
       next(error);
     }
   };
+
+  public read = async (_req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { code, data } = await this._motorcycleService.read();
+      return res.status(code).json(data);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default MotorcyclesController;
