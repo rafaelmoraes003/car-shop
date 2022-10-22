@@ -169,4 +169,51 @@ describe('Cars Service', () => {
 
   });
 
+  describe('Deletind a car', () => {
+
+    describe('Succesfully deleted', () => {
+
+      before(async () => {
+        sinon.stub(carsModel, 'delete').resolves(carMockWithId);
+      });
+
+      it('Returns code 204', async () => {
+        const deletedCar = await carsService.delete(carMockWithId._id);
+        expect(deletedCar).to.be.deep.equal({
+          code: StatusCodes.SUCCESS_NO_CONTENT,
+        });
+      })
+
+    });
+
+    describe('Invalid ObjectId', () => {
+
+      it('Throws error "Id must have 24 hexadecimal characters"', async () => {
+        try {
+          await carsService.delete('123');
+        } catch (error: any) {
+          expect(error.message).to.be.equal('Id must have 24 hexadecimal characters');
+        }
+      });
+
+    });
+
+    describe('Not found', () => {
+
+      before(async () => {
+        sinon.stub(carsModel, 'delete').resolves(null);
+      });
+
+      it('Throws error "Object not found"', async () => {
+        try {
+          await carsService.delete('111111111111111111111111');
+        } catch (error: any) {
+          expect(error.message).to.be.equal('Object not found');
+        }
+      });
+
+    });
+
+  });
+
 });
