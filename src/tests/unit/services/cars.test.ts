@@ -38,4 +38,20 @@ describe('Cars Service', () => {
 
   });
 
+  describe('Searching all cars', () => {
+
+    before(async () => {
+      sinon.stub(carsModel, 'read').resolves([carMockWithId]);
+    });
+
+    it('Successfully found', async () => {
+      const cars = await carsService.read();
+      expect(cars).to.deep.equal({
+        code: StatusCodes.OK,
+        data: [carMockWithId],
+      });
+    });
+
+  });
+
 });
