@@ -29,6 +29,16 @@ class MotorcyclesController {
       next(error);
     }
   };
+
+  public readOne = async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    try {
+      const { code, data } = await this._motorcycleService.readOne(id);
+      return res.status(code).json(data);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default MotorcyclesController;
