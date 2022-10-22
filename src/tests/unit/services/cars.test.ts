@@ -4,6 +4,7 @@ import CarsModel from '../../../models/CarsModel';
 import CarsService from '../../../services/CarsService';
 import { carMock, carMockWithId } from '../../mocks/cars';
 import StatusCodes from '../../../interfaces/StatusCodes';
+import CustomError from '../../../interfaces/CustomError';
 const { expect } = chai;
 
 describe('Cars Service', () => {
@@ -52,6 +53,53 @@ describe('Cars Service', () => {
       });
     });
 
+  });
+
+  describe('Searching one car', () => {
+
+    describe('Succesfully found', () => {
+
+      before(async () => {
+        sinon.stub(carsModel, 'readOne').resolves(carMockWithId);
+      });
+
+      it('Returns car with code 200', async () => {
+        const car = await carsService.readOne(carMockWithId._id);
+        expect(car).to.be.deep.equal({
+          code: StatusCodes.OK,
+          data: carMockWithId,
+        });
+      });
+
+    });
+
+    describe('Not found', () => {
+
+      before(async () => {
+        sinon.stub(carsModel, 'readOne').resolves(null);
+      });
+  
+      it('Throws error "Object not found"', async () => {
+        try {
+          await carsService.readOne(carMockWithId._id);
+        } catch (error: any) {
+          expect(error.message).to.be.equal('Object not found');
+        }
+      });
+
+    });
+
+    describe('Invalid ObjectId', () => {
+
+      it('Throws error "Id must have 24 hexadecimal characters"', async () => {
+        try {
+          await carsService.readOne('123');
+        } catch (error: any) {
+          expect(error.message).to.be.equal('Id must have 24 hexadecimal characters');
+        }
+      });
+
+    });
   });
 
 });
