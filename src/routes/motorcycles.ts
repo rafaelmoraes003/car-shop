@@ -1,9 +1,12 @@
 import { Router } from 'express';
 import MotorcyclesController from '../controllers/MotorcyclesController';
+import MotorcyclesModel from '../models/MotorcyclesModel';
 import MotorcyclesService from '../services/MotorcyclesService';
 
 const motorcycles = Router();
-const motorcyclesService = new MotorcyclesService();
+
+const motorcyclesModel = new MotorcyclesModel();
+const motorcyclesService = new MotorcyclesService(motorcyclesModel);
 const motorcyclesController = new MotorcyclesController(motorcyclesService);
 
 motorcycles.post('/', motorcyclesController.create);
