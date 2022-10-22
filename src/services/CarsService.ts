@@ -31,6 +31,14 @@ class CarsService implements IService<ICar> {
     if (!car) throw new CustomError('Object not found', StatusCodes.NOT_FOUND);
     return { code: StatusCodes.OK, data: car };
   }
+
+  public async update(_id: string, obj: ICar) {
+    validateBody(obj, zodCarSchema, zodVehicleSchema);
+    validateObjectId(_id);
+    const updatedCar = await this._carModel.update(_id, obj);
+    if (!updatedCar) throw new CustomError('Object not found', StatusCodes.NOT_FOUND);
+    return { code: 200, data: { _id, ...obj } };
+  }
 }
 
 export default CarsService;
