@@ -39,6 +39,20 @@ class CarsController {
       next(error);
     }
   };
+
+  public update = async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const { model, year, color, status, buyValue, seatsQty, doorsQty } = req.body;
+    try {
+      const { code, data } = await this._carService.update(
+        id,
+        { model, year, color, status, buyValue, seatsQty, doorsQty },
+      );
+      return res.status(code).json(data);
+    } catch (error) {
+      next(error);
+    }
+  };
 }
 
 export default CarsController;
