@@ -12,5 +12,6 @@ cars.post('/', carsController.create);
 cars.get('/', carsController.read);
 cars.get('/:id', carsController.readOne);
 cars.put('/:id', carsController.update);
+cars.delete('/:id', carsController.delete);
 
 export default cars;
