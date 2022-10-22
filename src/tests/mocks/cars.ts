@@ -11,3 +11,7 @@ export const carMockWithId = {
   _id: "4edd40c86762e0fb12000003",
   ...carMock,
 }
+
+export const updatedCarMock = { ...carMock, model: 'Jeep Renegade' };
+
+export const updatedCarMockWithId = { _id: carMockWithId._id, ...updatedCarMock };
