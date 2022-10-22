@@ -66,7 +66,7 @@ describe('Cars Controller', () => {
       next = sinon.stub();
     });
 
-    it('Successfuly found', async () => {
+    it('Successfully found', async () => {
       await carsController.read(req, res, next as NextFunction);
       expect((res.status as sinon.SinonStub).calledWith(StatusCodes.OK)).to.be.true;
       expect((res.json as sinon.SinonStub).calledWith([carMockWithId])).to.be.true;
