@@ -51,4 +51,32 @@ describe('Cars Controller', () => {
 
   });
 
+  describe('Searching all cars', () => {
+
+    before(async () => {
+      sinon.stub(carsService, 'read')
+        .onCall(0).resolves({
+          code: StatusCodes.OK,
+          data: [carMockWithId],
+        })
+        .onCall(1).throws(serverError);
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns(res);
+      next = sinon.stub();
+    });
+
+    it('Successfuly found', async () => {
+      await carsController.read(req, res, next as NextFunction);
+      expect((res.status as sinon.SinonStub).calledWith(StatusCodes.OK)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith([carMockWithId])).to.be.true;
+    });
+
+    it('Server error', async () => {
+      await carsController.read(req, res, next as NextFunction);
+      expect((next as sinon.SinonStub).calledWith(serverError)).to.be.true;
+    });
+
+  });
+
 });
