@@ -5,7 +5,7 @@ import CarsModel from '../../../models/CarsModel';
 import CarsService from '../../../services/CarsService';
 import CarsController from '../../../controllers/CarsController';
 import StatusCodes from '../../../interfaces/StatusCodes';
-import { carMock, carMockWithId } from '../../mocks/cars';
+import { carMock, carMockWithId, updatedCarMock, updatedCarMockWithId } from '../../mocks/cars';
 const { expect } = chai;
 
 describe('Cars Controller', () => {
@@ -104,6 +104,36 @@ describe('Cars Controller', () => {
 
     it('Server error', async () => {
       await carsController.readOne(req, res, next as NextFunction);
+      expect((next as sinon.SinonStub).calledWith(serverError)).to.be.true;
+    });
+
+  });
+
+  describe('Updating a car', () => {
+    
+    before(async () => {
+      sinon.stub(carsService, 'update')
+      .onCall(0).resolves({
+        code: StatusCodes.OK,
+        data: updatedCarMockWithId,
+      })
+      .onCall(1).throws(serverError);
+    
+      req.params = { id: carMockWithId._id };
+      req.body = updatedCarMock;
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns(res);
+      next = sinon.stub();
+    });
+
+    it('Successfully updated', async () => {
+      await carsController.update(req, res, next as NextFunction);
+      expect((res.status as sinon.SinonStub).calledWith(StatusCodes.OK)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith(updatedCarMockWithId)).to.be.true;
+    });
+  
+    it('Server error', async () => {
+      await carsController.update(req, res, next as NextFunction);
       expect((next as sinon.SinonStub).calledWith(serverError)).to.be.true;
     });
 
