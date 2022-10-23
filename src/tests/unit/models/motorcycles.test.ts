@@ -52,5 +52,19 @@ describe('Motorcycles Model', () => {
 
   });
 
+  describe('Updating a motorcycle', async () => {
+
+    const updatedResult = { ...motorcycleMockWithId, model: 'Biz' };
+
+    before(async () => {
+      sinon.stub(Model, 'findByIdAndUpdate').resolves(updatedResult);
+    });
+
+    it('Succesfully updated', async () => {
+      const updatedMotorcycle = await motorcyclesModel.update(motorcycleMockWithId._id,  motorcycleMock as IMotorcycle);
+      expect(updatedMotorcycle).to.be.deep.equal(updatedResult);
+    });
+
+  });
 
 });
