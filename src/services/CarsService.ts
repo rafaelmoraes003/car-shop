@@ -1,9 +1,9 @@
 import { ICar, zodCarSchema } from '../interfaces/ICar';
-import DatabaseModel from '../models/DatabaseModel';
+import { IModel } from '../interfaces/IModel';
 import APIService from './APIService';
 
 class CarsService extends APIService<ICar> {
-  constructor(model: DatabaseModel<ICar>, schema = zodCarSchema) {
+  constructor(model: IModel<ICar>, schema = zodCarSchema) {
     super(model, schema);
   }
 } 
