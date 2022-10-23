@@ -2,7 +2,7 @@
 
 ###
 
-<p align="left">Neste projeto foi criada uma API CRUD para uma concessionária de veículos com um banco de dados MongoDB.<br><br>Para o desenvolvimento da API foi utilizado o ODM Mongoose para fazer a conexão do banco de dados com o Node.js. <br><br>O projeto utiliza a arquitetura MSC (Model-Service-Controller), Orientação a Objetos seguindo os princípios SOLID com TypeScript e testes unitários feitos com Mocha, Chai e Sinon, que fazem cobertura de 100% das linhas de código do projeto.</p>
+<p align="left">Neste projeto, foi criada uma API CRUD para uma concessionária de veículos com um banco de dados MongoDB.<br><br>Para o desenvolvimento da API, foi utilizado o ODM Mongoose para fazer a conexão do banco de dados com o Node.js. <br><br>O projeto utiliza a arquitetura MSC (Model-Service-Controller), Orientação a Objetos seguindo os princípios SOLID com TypeScript e testes unitários feitos com Mocha, Chai e Sinon, que fazem cobertura de 100% das linhas de código do projeto.</p>
 
 ###
 
