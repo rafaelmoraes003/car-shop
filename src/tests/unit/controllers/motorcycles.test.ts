@@ -110,5 +110,35 @@ describe('Motorcycles Controller', () => {
 
   });
 
+  describe('Updating a motorcycle', () => {
+    
+    before(async () => {
+      sinon.stub(motorcyclesService, 'update')
+      .onCall(0).resolves({
+        code: StatusCodes.OK,
+        data: updatedMotorcycleMockWithId as IMotorcycle & { _id: string },
+      })
+      .onCall(1).throws(serverError);
+    
+      req.params = { id: updatedMotorcycleMockWithId._id };
+      req.body = updatedMotorcycleMock;
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns(res);
+      next = sinon.stub();
+    });
+
+    it('Successfully updated', async () => {
+      await motorcyclesController.update(req, res, next as NextFunction);
+      expect((res.status as sinon.SinonStub).calledWith(StatusCodes.OK)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith(updatedMotorcycleMockWithId)).to.be.true;
+    });
+  
+    it('Server error', async () => {
+      await motorcyclesController.update(req, res, next as NextFunction);
+      expect((next as sinon.SinonStub).calledWith(serverError)).to.be.true;
+    });
+
+  });
+
 
 });
