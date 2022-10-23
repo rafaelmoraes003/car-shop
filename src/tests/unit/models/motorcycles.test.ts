@@ -26,5 +26,18 @@ describe('Motorcycles Model', () => {
 
   });
 
+  describe('Searching all motorcycles', () => {
+
+    before(async () => {
+      sinon.stub(Model, 'find').resolves([motorcycleMockWithId]);
+    });
+
+    it('Succesfully found', async () => {
+      const motorcycle = await motorcyclesModel.read();
+      expect(motorcycle).to.be.deep.equal([motorcycleMockWithId]);
+    });
+
+  });
+
 
 });
