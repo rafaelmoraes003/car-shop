@@ -55,5 +55,52 @@ describe('Motorcycles Service', () => {
 
   });
 
+  describe('Searching one motorcycle', () => {
+
+    describe('Succesfully found', () => {
+
+      before(async () => {
+        sinon.stub(motorcyclesModel, 'readOne').resolves(motorcycleMockWithId as IMotorcycle);
+      });
+
+      it('Returns motorcycle with code 200', async () => {
+        const motorcycle = await motorcyclesService.readOne(motorcycleMockWithId._id);
+        expect(motorcycle).to.be.deep.equal({
+          code: StatusCodes.OK,
+          data: motorcycleMockWithId,
+        });
+      });
+
+    });
+
+    describe('Not found', () => {
+
+      before(async () => {
+        sinon.stub(motorcyclesModel, 'readOne').resolves(null);
+      });
+  
+      it('Throws error "Object not found"', async () => {
+        try {
+          await motorcyclesService.readOne(motorcycleMockWithId._id);
+        } catch (error: any) {
+          expect(error.message).to.be.equal('Object not found');
+        }
+      });
+
+    });
+
+    describe('Invalid ObjectId', () => {
+
+      it('Throws error "Id must have 24 hexadecimal characters"', async () => {
+        try {
+          await motorcyclesService.readOne('123');
+        } catch (error: any) {
+          expect(error.message).to.be.equal('Id must have 24 hexadecimal characters');
+        }
+      });
+
+    });
+  });
+
   
 });
