@@ -102,5 +102,71 @@ describe('Motorcycles Service', () => {
     });
   });
 
+  describe('Updating a motorcycle', () => {
+
+    describe('Successfully updated', () => {
+
+      before(async () => {
+        sinon.stub(motorcyclesModel, 'update').resolves({
+          ...motorcycleMockWithId,
+          model: 'Biz',
+        } as IMotorcycle);
+      });
+
+      it('Returns updated motorcycle with code 200', async () => {
+        const updatedMotorcycle = await motorcyclesService.update(
+          motorcycleMockWithId._id,
+          { ...motorcycleMockWithId, model: 'Biz' } as IMotorcycle,
+        );
+        expect(updatedMotorcycle).to.be.deep.equal({
+          code: StatusCodes.OK,
+          data: { ...motorcycleMockWithId, model: 'Biz' },
+        });
+      });
+
+    });
+
+    describe('Semantic error', () => {
+
+      it('Throws error "Required"', async () => {
+        try {
+          await motorcyclesService.update(motorcycleMockWithId._id, {} as IMotorcycle);
+        } catch (error: any) {
+          expect(error.message).to.be.equal('Required');
+        }
+      });
+
+    });
+
+    describe('Invalid ObjectId', () => {
+
+      it('Throws error "Id must have 24 hexadecimal characters"', async () => {
+        try {
+          await motorcyclesService.update('123', motorcycleMock as IMotorcycle);
+        } catch (error: any) {
+          expect(error.message).to.be.equal('Id must have 24 hexadecimal characters');
+        }
+      });
+
+    });
+
+    describe('Not found', () => {
+
+      before(async () => {
+        sinon.stub(motorcyclesModel, 'update').resolves(null);
+      });
+
+      it('Throws error "Object not found"', async () => {
+        try {
+          await motorcyclesService.update('111111111111111111111111', motorcycleMock as IMotorcycle);
+        } catch (error: any) {
+          expect(error.message).to.be.equal('Object not found');
+        }
+      });
+
+    });
+
+  });
+
   
 });
