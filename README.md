@@ -137,7 +137,7 @@ Faça o clone da aplicação usando o comando `git clone`. Após isso, entre na 
   year: Número maior ou igual 1900 e menor ou igual 2022
   color: String com pelo menos 3 caracteres
   buyValue: Número inteiro
-  status: Propriedade opcional, indica se o carro pode ou não ser comprado (booleano)
+  status: Propriedade opcional, indica se a motocicleta pode ou não ser comprada (booleano)
   category: String que só aceita os valores Street, Custom ou Trail
   engineCapacity: Número maior que 0 e menor ou igual 2500
 }
