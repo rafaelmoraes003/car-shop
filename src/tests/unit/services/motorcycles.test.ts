@@ -39,6 +39,21 @@ describe('Motorcycles Service', () => {
 
   });
 
-  
+  describe('Searching all motorcycles', () => {
 
+    before(async () => {
+      sinon.stub(motorcyclesModel, 'read').resolves([motorcycleMockWithId] as IMotorcycle[]);
+    });
+
+    it('Successfully found', async () => {
+      const motorcycle = await motorcyclesService.read();
+      expect(motorcycle).to.deep.equal({
+        code: StatusCodes.OK,
+        data: [motorcycleMockWithId],
+      });
+    });
+
+  });
+
+  
 });
