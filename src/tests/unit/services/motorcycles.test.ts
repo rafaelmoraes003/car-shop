@@ -168,5 +168,51 @@ describe('Motorcycles Service', () => {
 
   });
 
+  describe('Deletind a motorcycle', () => {
+
+    describe('Succesfully deleted', () => {
+
+      before(async () => {
+        sinon.stub(motorcyclesModel, 'delete').resolves(motorcycleMockWithId as IMotorcycle);
+      });
+
+      it('Returns code 204', async () => {
+        const deletedMotorcycle = await motorcyclesService.delete(motorcycleMockWithId._id);
+        expect(deletedMotorcycle).to.be.deep.equal({
+          code: StatusCodes.SUCCESS_NO_CONTENT,
+        });
+      })
+
+    });
+
+    describe('Invalid ObjectId', () => {
+
+      it('Throws error "Id must have 24 hexadecimal characters"', async () => {
+        try {
+          await motorcyclesService.delete('123');
+        } catch (error: any) {
+          expect(error.message).to.be.equal('Id must have 24 hexadecimal characters');
+        }
+      });
+
+    });
+
+    describe('Not found', () => {
+
+      before(async () => {
+        sinon.stub(motorcyclesModel, 'delete').resolves(null);
+      });
+
+      it('Throws error "Object not found"', async () => {
+        try {
+          await motorcyclesService.delete('111111111111111111111111');
+        } catch (error: any) {
+          expect(error.message).to.be.equal('Object not found');
+        }
+      });
+
+    });
+
+  });
   
 });
