@@ -4,7 +4,6 @@ import CarsModel from '../../../models/CarsModel';
 import CarsService from '../../../services/CarsService';
 import { carMock, carMockWithId } from '../../mocks/cars';
 import StatusCodes from '../../../interfaces/StatusCodes';
-import CustomError from '../../../interfaces/CustomError';
 import { ICar } from '../../../interfaces/ICar';
 const { expect } = chai;
 
