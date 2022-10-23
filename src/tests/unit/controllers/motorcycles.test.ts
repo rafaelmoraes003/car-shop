@@ -52,5 +52,33 @@ describe('Motorcycles Controller', () => {
 
   });
 
+  describe('Searching all motorcycles', () => {
+
+    before(async () => {
+      sinon.stub(motorcyclesService, 'read')
+        .onCall(0).resolves({
+          code: StatusCodes.OK,
+          data: [motorcycleMockWithId] as IMotorcycle[],
+        })
+        .onCall(1).throws(serverError);
+
+      res.status = sinon.stub().returns(res);
+      res.json = sinon.stub().returns(res);
+      next = sinon.stub();
+    });
+
+    it('Successfully found', async () => {
+      await motorcyclesController.read(req, res, next as NextFunction);
+      expect((res.status as sinon.SinonStub).calledWith(StatusCodes.OK)).to.be.true;
+      expect((res.json as sinon.SinonStub).calledWith([motorcycleMockWithId])).to.be.true;
+    });
+
+    it('Server error', async () => {
+      await motorcyclesController.read(req, res, next as NextFunction);
+      expect((next as sinon.SinonStub).calledWith(serverError)).to.be.true;
+    });
+
+  });
+
 
 });
