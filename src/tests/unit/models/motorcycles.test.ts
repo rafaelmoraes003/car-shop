@@ -67,4 +67,18 @@ describe('Motorcycles Model', () => {
 
   });
 
+  describe('Deleting a motorcycle', async () => {
+
+
+    before(async () => {
+      sinon.stub(Model, 'findByIdAndDelete').resolves();
+    });
+
+    it('Succesfully deleted', async () => {
+      const deletedMotorcycle = await motorcyclesModel.delete(motorcycleMockWithId._id);
+      expect(deletedMotorcycle).to.be.undefined;
+    });
+
+  });
+
 });
