@@ -119,8 +119,8 @@ Faça o clone da aplicação usando o comando `git clone`. Após isso, entre na 
 
 ```
 {
-  model: "Honda Biz 125",
-  year: 2023,
+  model: "Honda Biz",
+  year: 2022,
   color: "red",
   buyValue: 3500,
   status: false
