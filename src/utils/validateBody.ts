@@ -3,9 +3,9 @@ import CustomError from '../interfaces/CustomError';
 import StatusCodes from '../interfaces/StatusCodes';
 
 const validateBody = (
-  obj: any, 
-  schema: z.ZodObject<any>,
-  mainSchema: z.ZodObject<any>,
+  obj: unknown, 
+  schema: z.ZodObject<z.ZodRawShape>,
+  mainSchema: z.ZodObject<z.ZodRawShape>,
 ): void => {
   const zodSchemas = mainSchema.merge(schema);
   const parsedObj = zodSchemas.safeParse(obj);

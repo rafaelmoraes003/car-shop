@@ -11,9 +11,9 @@ const objectNotFoundMessage = 'Object not found';
 
 abstract class APIService<T> implements IService<T> {
   private _model: IModel<T>;
-  private _zodSchema: z.ZodObject<any>;
+  private _zodSchema: z.ZodObject<z.ZodRawShape>;
 
-  constructor(model: IModel<T>, zodSchema: z.ZodObject<any>) {
+  constructor(model: IModel<T>, zodSchema: z.ZodObject<z.ZodRawShape>) {
     this._model = model;
     this._zodSchema = zodSchema; 
   }
