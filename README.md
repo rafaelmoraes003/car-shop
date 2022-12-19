@@ -1,12 +1,12 @@
-<h1 align="left">Projeto Car Shop</h1>
+<h1 align="left">Car Shop</h1>
 
 ###
 
-<p align="left">Neste projeto, foi criada uma API CRUD para uma concessionária de veículos com um banco de dados MongoDB.<br><br>Para o desenvolvimento da API, foi utilizado o ODM Mongoose para fazer a conexão do banco de dados com o Node.js. <br><br>O projeto utiliza a arquitetura MSC (Model-Service-Controller), Orientação a Objetos seguindo os princípios SOLID com TypeScript e testes unitários feitos com Mocha, Chai e Sinon, que fazem cobertura de 100% das linhas de código do projeto.</p>
+<p align="left">In this project, a CRUD API was created for a car dealership with a MongoDB database.<br><br>For the development of the API, ODM Mongoose was used to connect the database with Node.js . <br><br>The project uses the MSC (Model-Service-Controller) architecture, Object Orientation following the SOLID principles with TypeScript and unit tests made with Mocha, Chai and Sinon, which cover 100% of the lines of code from the project.</p>
 
 ###
 
-<h2 align="left">Tecnologias utilizadas</h2>
+<h2 align="left">Technologies used</h2>
 
 ###
 
@@ -21,45 +21,45 @@
 
 ###
 
-<h2 align="left">Como utilizar a aplicação</h2>
+<h2 align="left">How to use the application</h2>
 
-Faça o clone da aplicação usando o comando `git clone`. Após isso, entre na pasta do projeto utilizando o comando `cd car-shop`.
+Clone the application using the `git clone` command. After that, enter the project folder using the `cd car-shop` command.
 
 ###
 
 <details>
   <summary>
-    <strong>🐳 Rodando pelo Docker</strong>
+    <strong>🐳 Running through Docker</strong>
   </summary><br>
 
-  - Dentro da pasta do projeto, utilize o comando `docker-compose up -d`. Ele é o responsável por subir a API do Node.js e o banco de dados MongoDB.
-  - Entre no terminal do container através do comando `docker exec -it car_shop bash`.
-  - Dentro do container, instale as dependências necessárias através do comando `npm install`.
-  - Por fim, ainda dentro do terminal do container, para inicializar a API, utilize o comando `npm run dev`.
-  > A API se encontra na porta `3001` do localhost.
+  - Inside the project folder, use the `docker-compose up -d` command. It is responsible for uploading the Node.js API and the MongoDB database.
+  -Enter the container's terminal via the `docker exec -it car_shop bash` command.
+  - Inside the container, install the necessary dependencies using the `npm install` command.
+  - Finally, still inside the container's terminal, to initialize the API, use the `npm run dev` command.
+  > The API is on port `3001` on localhost.
 
 
 </details>
 
 <details>
   <summary>
-    <strong>Rodando localmente</strong>
+    <strong>Running locally</strong>
   </summary><br>
 
-  - Dentro da pasta do projeto, utilize o comando `npm install` para instalar as dependências necessárias.
-  - Coloque a URI do MongoDB no arquivo `./src/models/connection.ts` na variável `MONGO_DB_URL`.
-  - Utilize o comando `npm run dev` para inicializar a API.
-  > A API se encontra na porta `3001` do localhost.
+  - Inside the project folder, use the `npm install` command to install the necessary dependencies.
+  - Put the MongoDB URI in the `./src/models/connection.ts` file in the `MONGO_DB_URL` variable.
+  - Use the `npm run dev` command to initialize the API.
+  > The API is on port `3001` on localhost.
 
 
 </details>
 
 ###
 
-<h2 align="left">Testes unitários e cobertura de testes</h2>
+<h2 align="left">Unit tests and test coverage</h2>
 
-- Para rodar os testes unitários, utilize o comando `npm run test:dev`.
-- Para verificar a cobertura dos testes, utilize o comando `npm run test:coverage`.
+- To run the unit tests, use the `npm run test:dev` command.
+- To verify test coverage, use the `npm run test:coverage` command.
 
 ###
 
@@ -69,15 +69,15 @@ Faça o clone da aplicação usando o comando `git clone`. Após isso, entre na 
 
 | Método | Funcionalidade | URL |
 |---|---|---|
-| `POST` | Adiciona um carro  | http://localhost:3001/cars |
-| `GET` |  Lista todos os carros  | http://localhost:3001/cars |
-| `GET` |  Lista um carro com base em seu _id  | http://localhost:3001/cars/:id |
-| `PUT` |  Atualiza dados de um carro com base em seu _id  | http://localhost:3001/cars/:id |
-| `DELETE` |  Deleta um carro com base em seu _id  | http://localhost:3001/cars/:id |
+| `POST` | Create new car  | http://localhost:3001/cars |
+| `GET` |  List all cars  | http://localhost:3001/cars |
+| `GET` |  List a car based on its _id  | http://localhost:3001/cars/:id |
+| `PUT` |  Update a car based on its _id  | http://localhost:3001/cars/:id |
+| `DELETE` | Delete a car based on its _id  | http://localhost:3001/cars/:id |
 
-#### Os endpoints `POST` e `PUT` necessitam de um objeto JSON no seguinte formato:
+#### The `POST` and `PUT` endpoints require a JSON object in the following format:
 
-```
+```JavaScript
 {
   model: "Ferrari Maranello", 
   year: 1963, 
@@ -89,17 +89,17 @@ Faça o clone da aplicação usando o comando `git clone`. Após isso, entre na 
 }
 ```
 
-- Sobre as propriedades do objeto acima, é importante saber:
+- About the properties of the above object, it is important to know:
 
-```
+```JavaScript
 {
-  model: String com pelo menos 3 caracteres
-  year: Número maior ou igual 1900 e menor ou igual 2022
-  color: String com pelo menos 3 caracteres
-  buyValue: Número inteiro
-  status: Propriedade opcional, indica se o carro pode ou não ser comprado (booleano)
-  seatsQty: Número maior ou igual 2 e menor ou igual 7
-  doorsQty: Número maior ou igual 2 e menor ou igual 4
+  model: String with at least 3 characters
+  year: Number greater than or equal to 1900 and less than or equal to 2022
+  color: String with at least 3 characters
+  buyValue: Integer
+  status: Optional property, indicates whether or not the car can be purchased (boolean)
+  seatsQty: Number greater than or equal to 2 and less than or equal to 7
+  doorsQty: Number greater than or equal to 2 and less than or equal to 4
 }
 ```
 
@@ -109,15 +109,15 @@ Faça o clone da aplicação usando o comando `git clone`. Após isso, entre na 
 
 | Método | Funcionalidade | URL |
 |---|---|---|
-| `POST` | Adiciona uma motocicleta  | http://localhost:3001/motorcycles
-| `GET` |  Lista todas as motocicletas  | http://localhost:3001/motorcycles |
-| `GET` |  Lista uma motocicleta com base em seu _id  | http://localhost:3001/motorcycles/:id |
-| `PUT` |  Atualiza dados de uma motocicleta com base em seu _id  | http://localhost:3001/motorcycles/:id |
-| `DELETE` |  Deleta uma motocicleta com base em seu _id  | http://localhost:3001/motorcycles/:id |
+| `POST` | Create new motorcycle | http://localhost:3001/motorcycles
+| `GET` |  List all motorcycles  | http://localhost:3001/motorcycles |
+| `GET` |  List a motorcycle based on its _id  | http://localhost:3001/motorcycles/:id |
+| `PUT` |  Update a motorcycle based on its _id  | http://localhost:3001/motorcycles/:id |
+| `DELETE` |  Delete a motorcycle based on its _id  | http://localhost:3001/motorcycles/:id |
 
-#### Os endpoints `POST` e `PUT` necessitam de um objeto JSON no seguinte formato:
+#### The `POST` and `PUT` endpoints require a JSON object in the following format:
 
-```
+```JavaScript
 {
   model: "Honda Biz",
   year: 2022,
@@ -129,17 +129,17 @@ Faça o clone da aplicação usando o comando `git clone`. Após isso, entre na 
 }
 ```
 
-- Sobre as propriedades do objeto acima, é importante saber:
+- About the properties of the above object, it is important to know:
 
-```
+```JavaScript
 {
-  model: String com pelo menos 3 caracteres
-  year: Número maior ou igual 1900 e menor ou igual 2022
-  color: String com pelo menos 3 caracteres
-  buyValue: Número inteiro
-  status: Propriedade opcional, indica se a motocicleta pode ou não ser comprada (booleano)
-  category: String que só aceita os valores Street, Custom ou Trail
-  engineCapacity: Número maior que 0 e menor ou igual 2500
+  model: String with at least 3 characters
+  year: Number greater than or equal to 1900 and less than or equal to 2022
+  color: String with at least 3 characters
+  buyValue: Integer
+  status: Optional property, indicates whether or not the motorcycle can be purchased (boolean)
+  category: String that only accepts the values Street, Custom or Trail
+  engineCapacity: Number greater than 0 and less than or equal to 2500
 }
 ```
 
