@@ -33,7 +33,7 @@ Clone the application using the `git clone` command. After that, enter the proje
   </summary><br>
 
   - Inside the project folder, use the `docker-compose up -d` command. It is responsible for uploading the Node.js API and the MongoDB database.
-  -Enter the container's terminal via the `docker exec -it car_shop bash` command.
+  - Enter the container's terminal via the `docker exec -it car_shop bash` command.
   - Inside the container, install the necessary dependencies using the `npm install` command.
   - Finally, still inside the container's terminal, to initialize the API, use the `npm run dev` command.
   > The API is on port `3001` on localhost.
@@ -67,7 +67,7 @@ Clone the application using the `git clone` command. After that, enter the proje
 
 <h3 align="left">Cars</h3>
 
-| Método | Funcionalidade | URL |
+| Method | Functionality | URL |
 |---|---|---|
 | `POST` | Create new car  | http://localhost:3001/cars |
 | `GET` |  List all cars  | http://localhost:3001/cars |
@@ -107,7 +107,7 @@ Clone the application using the `git clone` command. After that, enter the proje
 
 <h3 align="left">Motorcycles</h3>
 
-| Método | Funcionalidade | URL |
+| Method | Funcionality | URL |
 |---|---|---|
 | `POST` | Create new motorcycle | http://localhost:3001/motorcycles
 | `GET` |  List all motorcycles  | http://localhost:3001/motorcycles |
