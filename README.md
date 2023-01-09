@@ -123,7 +123,7 @@ Clone the application using the `git clone` command. After that, enter the proje
   year: 2022,
   color: "red",
   buyValue: 3500,
-  status: false
+  status: false,
   category: "Street",
   engineCapacity: 125
 }
