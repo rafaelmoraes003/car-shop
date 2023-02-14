@@ -2,7 +2,7 @@
 
 ###
 
-<p align="left">In this project, a CRUD API was created for a car dealership with a MongoDB database.<br><br>For the development of the API, ODM Mongoose was used to connect the database with Node.js . <br><br>The project uses the MSC (Model-Service-Controller) architecture, Object Orientation following the SOLID principles with TypeScript and unit tests made with Mocha, Chai and Sinon, which cover 100% of the lines of code from the project.</p>
+<p align="left">In this project, a CRUD API was created for a car dealership with a MongoDB database.<br><br>For the development of the API, ODM Mongoose was used to connect the database with Node.js . <br><br>The project uses the MSC (Model-Service-Controller) architecture, Object Orientation following the SOLID principles with TypeScript and unit tests made with Mocha, Chai and Sinon, which cover 100% of the lines of code from the project.</p> 
 
 ###
 
